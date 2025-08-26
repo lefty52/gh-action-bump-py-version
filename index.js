@@ -3,6 +3,7 @@ const { execSync, spawn } = require('child_process');
 const { existsSync } = require('fs');
 const { EOL } = require('os');
 const path = require('path');
+const read_toml = require('./read_toml');
 
 // Change working directory if user defined PACKAGEJSON_DIR
 if (process.env.PACKAGEJSON_DIR) {
@@ -15,7 +16,7 @@ if (process.env.PACKAGEJSON_DIR) {
 
 console.log('process.env.GITHUB_WORKSPACE', process.env.GITHUB_WORKSPACE);
 const workspace = process.env.GITHUB_WORKSPACE;
-const pkg = getPackageJson();
+const pkg = getPyProjectToml();
 
 (async () => {
   const event = process.env.GITHUB_EVENT_PATH ? require(process.env.GITHUB_EVENT_PATH) : {};
@@ -203,7 +204,7 @@ const pkg = getPackageJson();
 
     // do it in the current checked out github branch (DETACHED HEAD)
     // important for further usage of the package.json version
-    await runInWorkspace('npm', ['version', '--allow-same-version=true', '--git-tag-version=false', current]);
+    // await runInWorkspace('npm', ['version', '--allow-same-version=true', '--git-tag-version=false', current]);
     console.log('current 1:', current, '/', 'version:', version);
     let newVersion = parseNpmVersionOutput(execSync(`npm version --git-tag-version=false ${version} --silent`).toString());
     console.log('newVersion 1:', newVersion);
@@ -278,11 +279,15 @@ const pkg = getPackageJson();
   exitSuccess('Version bumped!');
 })();
 
-function getPackageJson() {
-  const packageJSONFileName = process.env.PACKAGE_FILENAME || 'package.json';
-  const pathToPackage = path.join(workspace, packageJSONFileName);
-  if (!existsSync(pathToPackage)) throw new Error(packageJSONFileName + " could not be found in your project's root.");
-  return require(pathToPackage);
+function getPyProjectToml() {
+  const pyprojectTOMLFileName = process.env.PACKAGE_FILENAME || 'pyproroject.toml';
+  const pathToPyproject = path.join(workspace, pyprojectTOMLFileName);
+  if (!read_toml(pathToPyproject)) throw new Error(pyprojectTOMLFileName + " could not be found in your project's root.");
+  if (pathToPyproject) {
+      console.log('Parsed pyproject.toml:', projectConfig);
+      console.log('Project name:', projectConfig.project.version);
+    }
+  return require(pathToPyproject.project);
 }
 
 function exitSuccess(message) {
