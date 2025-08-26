@@ -3,3 +3,4 @@ node_modules
 /test-repo
 /.env
 .idea
+.python-version-control.2025-08-24.private-key.pem
