@@ -5,7 +5,7 @@ const { EOL } = require('os');
 const path = require('path');
 // const { toml } = require('toml');
 // import toml from 'toml';
-import {load} from 'js-toml';
+import {load} from 'js-toml.js';
 
 // Change working directory if user defined PACKAGEJSON_DIR
 if (process.env.PACKAGEJSON_DIR) {
