@@ -1,8 +1,6 @@
 name: Automated Version Bump
 description: Automated version bump for npm packages.
-# runs:
-  # using: node20
-  # main: index.js
+
 branding:
   icon: chevron-up
   color: blue
@@ -92,7 +90,7 @@ inputs:
 outputs:
   newTag:
     description: 'The newly created tag'
-
+    
 steps:
 - uses: actions/checkout@v4
 - name: Use Node.js

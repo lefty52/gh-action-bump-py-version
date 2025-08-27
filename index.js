@@ -307,7 +307,7 @@ function getPyProjectToml() {
       console.log('Parsed Object:', parsedObject.project.version);
       // console.log('Parsed pyproject.toml:', pathToPyproject);
       // console.log('Project name:', pathToPyproject.project.version);
-  return require(pathToPyproject.project);
+  return require("pathToPyproject.project");
 }
 
 function exitSuccess(message) {
