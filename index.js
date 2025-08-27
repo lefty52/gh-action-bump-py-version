@@ -1,13 +1,13 @@
 // test
-const { execSync, spawn } = require('child_process');
-const { existsSync } = require('fs');
-const { EOL } = require('os');
-const path = require('path');
+import { execSync, spawn } from 'child_process';
+import { existsSync } from 'fs';
+import { EOL } from 'os';
+import path from 'path';
 // const { toml } = require('toml');
 // import toml from 'toml';
 // const load = require('js-toml.js');
-const { parse, stringify } = 'smol-toml';
-// import { parse, stringify } from 'smol-toml';
+// const { parse, stringify } = 'smol-toml';
+import { parse, stringify } from 'smol-toml';
 
 // Change working directory if user defined PACKAGEJSON_DIR
 if (process.env.PACKAGEJSON_DIR) {
@@ -303,6 +303,8 @@ function getPyProjectToml() {
       // Parse the TOML string into a JavaScript object
       const parsedObject = parse(pathToPyproject);
       console.log('Parsed Object:', parsedObject);
+      console.log('Parsed Object:', parsedObject.project);
+      console.log('Parsed Object:', parsedObject.project.version);
       // console.log('Parsed pyproject.toml:', pathToPyproject);
       // console.log('Project name:', pathToPyproject.project.version);
   return require(pathToPyproject.project);

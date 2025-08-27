@@ -51,20 +51,4 @@ dob = 1990-01-01T12:00:00Z
 // Parse the TOML string into a JavaScript object
 const parsedObject = parse(tomlString);
 console.log('Parsed Object:', parsedObject);
-
-// Stringify the JavaScript object back into a TOML string
-const newTomlString = stringify(parsedObject);
-console.log('Stringified TOML:', newTomlString);
-
-// Alternatively, use the TOML global for convenience
-import TOML from 'smol-toml';
-
-const anotherObject = {
-  project: {
-    name: "Another Project",
-    version: "1.0.0"
-  }
-};
-
-const anotherTomlString = TOML.stringify(anotherObject);
-console.log('Another Stringified TOML:', anotherTomlString);
+console.log('Parsed Object:', parsedObject.database);
