@@ -27,5 +27,8 @@
     "js-yaml": "^4.1.0",
     "prettier": "^3.6.2",
     "tiny-glob": "^0.2.9"
+  },
+  "dependencies": {
+    "toml-js": "^0.0.8"
   }
 }
