@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "author": "Winton Booysen",
-  "type": "module",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",

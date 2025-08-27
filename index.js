@@ -5,7 +5,9 @@ const { EOL } = require('os');
 const path = require('path');
 // const { toml } = require('toml');
 // import toml from 'toml';
-import {load} from 'js-toml.js';
+// const load = require('js-toml.js');
+const { parse, stringify } = 'smol-toml.js';
+
 
 // Change working directory if user defined PACKAGEJSON_DIR
 if (process.env.PACKAGEJSON_DIR) {
@@ -297,8 +299,12 @@ function getPyProjectToml() {
   const pyprojectTOMLFileName = process.env.PACKAGE_FILENAME || 'pyproject.toml';
   const pathToPyproject = path.join(workspace, pyprojectTOMLFileName);
   if (!existsSync(pathToPyproject)) throw new Error(pyprojectTOMLFileName + " could not be found in your project's root.");
-      console.log('Parsed pyproject.toml:', pathToPyproject);
-      console.log('Project name:', pathToPyproject.project.version);
+
+      // Parse the TOML string into a JavaScript object
+      const parsedObject = parse(pathToPyproject);
+      console.log('Parsed Object:', parsedObject);
+      // console.log('Parsed pyproject.toml:', pathToPyproject);
+      // console.log('Project name:', pathToPyproject.project.version);
   return require(pathToPyproject.project);
 }
 
