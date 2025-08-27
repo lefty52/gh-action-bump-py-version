@@ -93,4 +93,7 @@ outputs:
 
 runs:
   using: node20
+  steps:
+    - name: Install dependencies
+      run: npm ci
   main: index.js
