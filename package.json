@@ -29,6 +29,7 @@
     "tiny-glob": "^0.2.9"
   },
   "dependencies": {
+    "smol-toml": "^1.4.2",
     "toml-js": "^0.0.8"
   }
 }

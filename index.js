@@ -6,8 +6,8 @@ const path = require('path');
 // const { toml } = require('toml');
 // import toml from 'toml';
 // const load = require('js-toml.js');
-const { parse, stringify } = 'smol-toml.js';
-
+const { parse, stringify } = 'smol-toml';
+// import { parse, stringify } from 'smol-toml';
 
 // Change working directory if user defined PACKAGEJSON_DIR
 if (process.env.PACKAGEJSON_DIR) {
