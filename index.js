@@ -3,7 +3,8 @@ const { execSync, spawn } = require('child_process');
 const { existsSync } = require('fs');
 const { EOL } = require('os');
 const path = require('path');
-const { toml } = require('toml');
+// const { toml } = require('toml');
+import toml from 'toml';
 
 // Change working directory if user defined PACKAGEJSON_DIR
 if (process.env.PACKAGEJSON_DIR) {
