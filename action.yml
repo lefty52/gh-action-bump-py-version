@@ -2,7 +2,12 @@ name: Automated Version Bump
 description: Automated version bump for npm packages.
 runs:
   using: node20
-  main: index.js
+  steps:
+    - name: Setup Dependencies
+      run: npm install
+      
+    - name: Run Bump
+      main: index.js
 branding:
   icon: chevron-up
   color: blue
