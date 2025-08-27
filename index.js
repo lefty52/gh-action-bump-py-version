@@ -293,7 +293,7 @@ function readPyprojectToml(filePath) {
 }
 
 function getPyProjectToml() {
-  const pyprojectTOMLFileName = process.env.PACKAGE_FILENAME || 'pyproroject.toml';
+  const pyprojectTOMLFileName = process.env.PACKAGE_FILENAME || 'pyproject.toml';
   const pathToPyproject = path.join(workspace, pyprojectTOMLFileName);
   if (!existsSync(pathToPyproject)) throw new Error(pyprojectTOMLFileName + " could not be found in your project's root.");
       console.log('Parsed pyproject.toml:', projectConfig);
