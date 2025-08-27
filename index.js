@@ -3,7 +3,7 @@ const { execSync, spawn } = require('child_process');
 const { existsSync } = require('fs');
 const { EOL } = require('os');
 const path = require('path');
-const read_toml = require('./read_toml');
+const toml = require('toml');
 
 // Change working directory if user defined PACKAGEJSON_DIR
 if (process.env.PACKAGEJSON_DIR) {
@@ -279,10 +279,22 @@ const pkg = getPyProjectToml();
   exitSuccess('Version bumped!');
 })();
 
+
+function readPyprojectToml(filePath) {
+  try {
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const parsedToml = toml.parse(fileContent);
+    return parsedToml;
+  } catch (error) {
+    console.error(`Error reading or parsing pyproject.toml: ${error.message}`);
+    return null;
+  }
+}
+
 function getPyProjectToml() {
   const pyprojectTOMLFileName = process.env.PACKAGE_FILENAME || 'pyproroject.toml';
   const pathToPyproject = path.join(workspace, pyprojectTOMLFileName);
-  if (!read_toml(pathToPyproject)) throw new Error(pyprojectTOMLFileName + " could not be found in your project's root.");
+  if (!readPyprojectToml(pathToPyproject)) throw new Error(pyprojectTOMLFileName + " could not be found in your project's root.");
   if (pathToPyproject) {
       console.log('Parsed pyproject.toml:', projectConfig);
       console.log('Project name:', projectConfig.project.version);
